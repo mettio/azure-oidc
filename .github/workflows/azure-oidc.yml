@@ -1,0 +1,35 @@
+name: Test Azure OIDC
+on:
+  push:
+    branches: none # [ "main" ]
+    paths: 
+      - 'azure-oidc.yml'
+  pull_request: 
+    branches: none  
+  workflow_dispatch:
+
+
+env:
+  AZURE_WEBAPP_NAME: your-app-name    # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
+  NODE_VERSION: '14.x'                # set this to the node version to use
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Az login
+      uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.ARM_CLIENT_ID }}
+        tenant-id: ${{ secrets.ARM_TENANT_ID }}
+        subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+    - name: 'Run az command'
+      run: |
+        az account show
+        az group list
+
