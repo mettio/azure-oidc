@@ -1,9 +1,9 @@
 name: Test Azure OIDC
 on:
   push:
-    branches: none # [ "main" ]
-    paths: 
-      - 'azure-oidc.yml'
+    branches: [ "main" ]
+    # paths: 
+    #   - 'azure-oidc.yml'
   pull_request: 
     branches: none  
   workflow_dispatch:
@@ -27,7 +27,7 @@ jobs:
       with:
         azcliversion: 2.44.0
         inlineScript: |
-          az acr build -r ${{ secrets.ARM_ACR_NAME }} -t service:${{ github.sha }} --build-arg http_port=3000  --target production  -f Dockerfile .
+          az acr build -r ${{ secrets.ARM_ACR_NAME }} -t service:${{ github.sha }} --build-arg http_port=3000 --target production .
     - name: 'Deploy image'
       uses: azure/webapps-deploy@v2
       with:
