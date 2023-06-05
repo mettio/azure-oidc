@@ -17,12 +17,12 @@ RUN adduser \
 
 WORKDIR /app
 
-COPY go.mod ./
-COPY go.sum ./
+COPY service/go.mod ./
+COPY service/go.sum ./
 RUN go mod download
 RUN go mod verify
 
-COPY *.go ./
+COPY service/*.go ./
 
 RUN GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o /stations
 

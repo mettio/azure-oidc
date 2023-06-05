@@ -1,4 +1,4 @@
-module git.mayflower.de/colors/station-service
+module github.com/mettio/azure-oidc/service
 
 go 1.20
 
