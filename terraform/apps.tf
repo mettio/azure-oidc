@@ -113,9 +113,36 @@ resource "azurerm_container_registry_webhook" "oidc" {
 }
 
 # The UAI should have the permission to deploy App Service
-# perhaps better: Contributor
-resource "azurerm_role_assignment" "uai_apps" {
-  scope                = azurerm_linux_web_app.oidc.id
-  role_definition_name = "Contributor"
-  principal_id         = azurerm_user_assigned_identity.oidc.principal_id
+# resource "azurerm_role_assignment" "uai_apps" {
+#   scope                = azurerm_linux_web_app.oidc.id
+#   role_definition_name = "Contributor"
+#   principal_id         = azurerm_user_assigned_identity.oidc.principal_id
+# }
+
+# againt:
+
+resource "azurerm_role_definition" "apps_build_deploy" {
+  name  = "AppsBuildDeployRole"
+  scope = data.azurerm_subscription.this.id
+  permissions {
+    actions = [
+      "Microsoft.Web/sites/Read",
+      "Microsoft.Web/sites/Write",
+      "Microsoft.Web/sites/publish/Action",
+      "Microsoft.Web/sites/config/list/action",
+      "Microsoft.Web/sites/publishxml/action",
+      "Microsoft.Web/sites/config/write",
+      "Microsoft.Web/sites/restart/action"
+    ]
+    not_actions = []
+  }
+  assignable_scopes = [
+    data.azurerm_subscription.this.id,
+  ]
+}
+
+resource "azurerm_role_assignment" "apps_build_deploy" {
+  scope              = azurerm_linux_web_app.oidc.id
+  role_definition_id = azurerm_role_definition.apps_build_deploy.role_definition_resource_id
+  principal_id       = azurerm_user_assigned_identity.oidc.principal_id
 }

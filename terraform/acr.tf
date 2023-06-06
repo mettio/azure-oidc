@@ -30,7 +30,7 @@ resource "azurerm_role_definition" "acr_build" {
 }
 
 resource "azurerm_role_assignment" "oidc_acr" {
-  scope = azurerm_container_registry.oidc.id
+  scope                            = azurerm_container_registry.oidc.id
   role_definition_id               = azurerm_role_definition.acr_build.role_definition_resource_id
   principal_id                     = azurerm_user_assigned_identity.oidc.principal_id
   skip_service_principal_aad_check = true
