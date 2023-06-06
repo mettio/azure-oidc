@@ -27,8 +27,7 @@ jobs:
       with:
         azcliversion: 2.44.0
         inlineScript: |
-          az acr login --name ${{ secrets.ARM_ACR_NAME }}
-          az acr build -r ${{ secrets.ARM_ACR_NAME }} -t service:${{ github.sha }} --build-arg http_port=3000 --target production .
+          az acr build -r ${{ secrets.ARM_ACR_NAME }} -t service:${{ github.sha }} --build-arg http_port=3000 --target production --file Dockerfile ./service
     - name: 'Deploy image'
       uses: azure/webapps-deploy@v2
       with:
