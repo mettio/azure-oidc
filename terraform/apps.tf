@@ -112,15 +112,6 @@ resource "azurerm_container_registry_webhook" "oidc" {
   }
 }
 
-# The UAI should have the permission to deploy App Service
-# resource "azurerm_role_assignment" "uai_apps" {
-#   scope                = azurerm_linux_web_app.oidc.id
-#   role_definition_name = "Contributor"
-#   principal_id         = azurerm_user_assigned_identity.oidc.principal_id
-# }
-
-# againt:
-
 resource "azurerm_role_definition" "apps_build_deploy" {
   name  = "AppsBuildDeployRole"
   scope = data.azurerm_subscription.this.id
