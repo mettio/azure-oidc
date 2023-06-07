@@ -38,3 +38,27 @@ jobs:
     - name: AZ logout
       run: |
         az logout
+    
+    - name: frontend
+      uses: AutoModality/action-clean@v1
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - name: Build And Deploy
+      id: builddeploy
+      uses: Azure/static-web-apps-deploy@5c50db0011c6423f073843e7e22c3d0cb6c53920
+      with:
+        # Master will be a prod deploy, all other will be preview deployments to branch url
+        production_branch: development
+        azure_static_web_apps_api_token: ${{ secrets.AZ_SWA_DEPLOY_TOKEN }}
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        action: "upload"
+        app_location: "frontend"
+        app_artifact_location: "dist"
+        output_location: "dist"
+        skip_app_build: false
+        app_build_command: npm run build
+        skip_api_build: false
+      env:
+        VITE_STATION_URL: ${{ secrets.VITE_STATION_URL }}
+  

@@ -1,0 +1,58 @@
+<template>
+  <h1>{{ msg }}</h1>
+  <p>{{ version }}</p>
+  <Logo :color="color" />
+</template>
+
+<script setup lang="ts">
+  import { onMounted } from "vue"
+  import Logo from "./Logo.vue"
+  import axios from "axios"
+
+  const props = defineProps({
+    msg: {
+      type: String,
+      required: true,
+    },
+    version: {
+      type: String,
+      required: true,
+    },
+    color: {
+      type: String,
+      required: true,
+    },
+  })
+
+  const fetchStations = async () => {
+    const request = axios.create({
+      headers: {
+        "Content-type": "application/json",
+      }
+    })
+    const response = await request.get(`${import.meta.env.VITE_STATION_URL}/api/v1/stations`)
+    return response.data
+  }
+
+  onMounted(async () => {
+    console.log(await fetchStations())
+  })
+</script>
+
+<style scoped>
+  a {
+    color: #42b983;
+  }
+
+  label {
+    margin: 0 0.5em;
+    font-weight: bold;
+  }
+
+  code {
+    background-color: #eee;
+    padding: 2px 4px;
+    border-radius: 4px;
+    color: #304455;
+  }
+</style>
