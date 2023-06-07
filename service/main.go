@@ -16,6 +16,11 @@ type Station struct {
 	Name     string `json:"name"`
 }
 
+type Error struct {
+	ErrorNo      int    `json:errno`
+	ErrorMessage string `json:message`
+}
+
 func station(uuid string) Station {
 	for _, v := range stations() {
 		if v.Uuid == uuid {
@@ -58,7 +63,13 @@ func main() {
 
 	e.GET("/api/v1/stations/:uuid", func(c echo.Context) error {
 		uuid := c.Param("uuid")
-		return c.JSON(http.StatusOK, station(uuid))
+		station := station(uuid)
+
+		if station != (Station{}) {
+			return c.JSON(http.StatusOK, station)
+		}
+
+		return c.JSON(http.StatusNotFound, Error{ErrorNo: 1, ErrorMessage: "Station not found"})
 	})
 
 	p := os.Getenv("HTTP_PORT")
