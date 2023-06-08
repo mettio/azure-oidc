@@ -1,0 +1,13 @@
+{
+  "trailingSlash": "never",
+  "globalHeaders": {
+    "content-security-policy": "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'"
+  },
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/*.{png,jpg,gif,webp,svg}", "/assets/*"]
+  },
+  "mimeTypes": {
+    ".json": "text/json"
+  }
+}

@@ -1,0 +1,7 @@
+.dockerignore
+.envrc
+.gitignore
+README.md
+.github
+frontend
+terraform
