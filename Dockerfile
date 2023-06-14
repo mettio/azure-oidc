@@ -1,10 +1,10 @@
 FROM golang:1.20-alpine AS builder
 
-ARG http_port
+ARG PORT=3000
 
 ENV USER=go
 ENV UID=10001
-ENV HTTP_PORT=${http_port}
+ENV HTTP_PORT=${PORT}
 
 RUN adduser \    
     --disabled-password \    
@@ -31,9 +31,9 @@ COPY --from=builder /etc/passwd /etc/passwd
 COPY --from=builder /etc/group /etc/group
 COPY --from=builder /stations /stations
 
-ENV HTTP_PORT=${HTTP_PORT}
+ENV HTTP_PORT=${PORT}
 
-EXPOSE ${HTTP_PORT}
+EXPOSE ${PORT}
 
 USER go:go
 
