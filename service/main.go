@@ -14,6 +14,7 @@ type Station struct {
 	Id       string `json:"id"`
 	LongName string `json:"longName"`
 	Name     string `json:"name"`
+	Purpose  string `json:"purpose"`
 }
 
 type Error struct {
@@ -32,14 +33,14 @@ func station(uuid string) Station {
 
 func stations() []Station {
 	return []Station{
-		{Index: 0, Uuid: "7ca07941-7877-4dad-a903-6670ece73fff", Id: "hydra", LongName: "The Hydra Station", Name: "Hydra"},
-		{Index: 1, Uuid: "a1dcc655-e6af-4225-9509-ad048305279f", Id: "tempest", LongName: "The Tempest Station", Name: "Tempest"},
-		{Index: 2, Uuid: "0cbf7d54-1b61-4126-bf45-eb81ae407439", Id: "arrow", LongName: "The Arrow Station", Name: "Arrow"},
-		{Index: 3, Uuid: "13016211-f77e-49c1-b27c-d0daab09cfb4", Id: "swan", LongName: "The Swan Station", Name: "Swan"},
-		{Index: 4, Uuid: "9820cd8d-ddea-494f-98b2-c77c55221377", Id: "flame", LongName: "The Flame Station", Name: "Flame"},
-		{Index: 5, Uuid: "9f989fc4-5029-4fe2-be66-a3d25b92a77b", Id: "pearl", LongName: "The Pearl Station", Name: "Pearl"},
-		{Index: 6, Uuid: "8d3fbb83-752a-4d50-be40-78d66ac8cbef", Id: "orchid", LongName: "The Orchid Station", Name: "Orchid"},
-		{Index: 7, Uuid: "05dc55cc-15e0-4eec-8a0c-d390a81cb94f", Id: "staff", LongName: "The Staff Station", Name: "Staff"},
+		{Index: 0, Uuid: "7ca07941-7877-4dad-a903-6670ece73fff", Id: "hydra", LongName: "The Hydra Station", Name: "Hydra", Purpose: "Zoological research"},
+		{Index: 1, Uuid: "a1dcc655-e6af-4225-9509-ad048305279f", Id: "tempest", LongName: "The Tempest Station", Name: "Tempest", Purpose: "Energy source/ generator/ gas storage"},
+		{Index: 2, Uuid: "0cbf7d54-1b61-4126-bf45-eb81ae407439", Id: "arrow", LongName: "The Arrow Station", Name: "Arrow", Purpose: "Weapons and defense research"},
+		{Index: 3, Uuid: "13016211-f77e-49c1-b27c-d0daab09cfb4", Id: "swan", LongName: "The Swan Station", Name: "Swan", Purpose: "Electromagnetic researches"},
+		{Index: 4, Uuid: "9820cd8d-ddea-494f-98b2-c77c55221377", Id: "flame", LongName: "The Flame Station", Name: "Flame", Purpose: "Communication"},
+		{Index: 5, Uuid: "9f989fc4-5029-4fe2-be66-a3d25b92a77b", Id: "pearl", LongName: "The Pearl Station", Name: "Pearl", Purpose: "Observation Station"},
+		{Index: 6, Uuid: "8d3fbb83-752a-4d50-be40-78d66ac8cbef", Id: "orchid", LongName: "The Orchid Station", Name: "Orchid", Purpose: "Greenhouse/Time research"},
+		{Index: 7, Uuid: "05dc55cc-15e0-4eec-8a0c-d390a81cb94f", Id: "staff", LongName: "The Staff Station", Name: "Staff", Purpose: "Medical station"},
 	}
 }
 
