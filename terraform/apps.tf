@@ -44,7 +44,7 @@ resource "azurerm_linux_web_app" "oidc" {
 
     cors {
       allowed_origins = [
-        "*.azurestaticapps.net",
+        "*",
       ]
     }
 
